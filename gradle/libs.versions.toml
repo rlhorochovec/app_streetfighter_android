@@ -21,6 +21,8 @@ cardviewV7 = "28.0.0"
 constraintlayout = "2.1.4"
 cardview = "1.0.0"
 constraintLayoutVersion = "2.0.4"
+circleimageview = "3.1.0"
+recyclerviewVersion = "1.4.0-alpha01"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -50,6 +52,8 @@ cardview-v7 = { group = "com.android.support", name = "cardview-v7", version.ref
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
 constraint-layout = { group = "com.android.support.constraint", name = "constraint-layout", version.ref = "constraintLayoutVersion" }
+circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
+recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerviewVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
