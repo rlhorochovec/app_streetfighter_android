@@ -18,7 +18,6 @@ import java.util.List;
 
 import br.rafaelhorochovec.app_streetfighter_android.R;
 import br.rafaelhorochovec.app_streetfighter_android.pojo.Fighter;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
