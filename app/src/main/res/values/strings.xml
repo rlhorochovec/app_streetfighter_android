@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">app_streetfighter_android</string>
+    <string name="app_name">Street Fighter</string>
+    <string name="name">Nome</string>
+    <string name="country">País</string>
 </resources>
