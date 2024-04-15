@@ -3,6 +3,7 @@
 Projeto de aplicativo utilizando Android Java e Retrofit, consumindo dados de uma API em Node.js e Postgres.
 
 ## Telas
+- Splash Screen
 - Listar
 - Filtrar
 
