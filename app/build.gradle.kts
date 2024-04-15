@@ -73,6 +73,8 @@ dependencies {
     implementation(libs.constraint.layout)
     implementation(libs.circleimageview)
     implementation(libs.recyclerview)
+    implementation(libs.androidx.coordinatorlayout)
+    implementation(libs.glide)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
