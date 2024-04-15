@@ -75,6 +75,8 @@ dependencies {
     implementation(libs.recyclerview)
     implementation(libs.androidx.coordinatorlayout)
     implementation(libs.glide)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
