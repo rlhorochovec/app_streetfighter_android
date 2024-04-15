@@ -1,67 +1,103 @@
 package br.rafaelhorochovec.app_streetfighter_android;
 
-import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import br.rafaelhorochovec.app_streetfighter_android.adapter.CustomAdapter;
-
+import br.rafaelhorochovec.app_streetfighter_android.adapter.FighterAdapter;
 import br.rafaelhorochovec.app_streetfighter_android.pojo.Fighter;
 import br.rafaelhorochovec.app_streetfighter_android.retrofit.ApiClient;
 import br.rafaelhorochovec.app_streetfighter_android.retrofit.ApiInterface;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CustomAdapter adapter;
-    private RecyclerView recyclerView;
-    ProgressDialog progressDialog;
+    private SearchView searchView;
+    private FighterAdapter fighterAdapter;
+    private List<Fighter> fighterList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        fighterAdapter = new FighterAdapter();
+        recyclerView.setAdapter(fighterAdapter);
 
-        progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage("Loading....");
-        progressDialog.show();
+        fighterList = new ArrayList<>();
+        ApiInterface apiService = ApiClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<Fighter>> call = apiService.getFighters();
 
-        /*Create handle for the RetrofitInstance interface*/
-        ApiInterface apiInterface = ApiClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<Fighter>> call = apiInterface.getFighters();
         call.enqueue(new Callback<List<Fighter>>() {
             @Override
             public void onResponse(Call<List<Fighter>> call, Response<List<Fighter>> response) {
-                progressDialog.dismiss();
-                generateDataList(response.body());
+                fighterList = response.body();
+                Log.d("TAG","Response = "+ fighterList);
+                fighterAdapter.setFighterList(getApplicationContext(), fighterList);
             }
 
             @Override
             public void onFailure(Call<List<Fighter>> call, Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.d("TAG","Response = "+t.toString());
             }
         });
     }
 
-    /*Method to generate List of data using RecyclerView with custom adapter*/
-    private void generateDataList(List<Fighter> fighters) {
-        recyclerView = findViewById(R.id.customRecyclerView);
-        adapter = new CustomAdapter(this,fighters);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
 
-        // recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                fighterAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                fighterAdapter.getFilter().filter(query);
+                return false;
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_search) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!searchView.isIconified()) {
+            searchView.setIconified(true);
+            return;
+        }
+        super.onBackPressed();
     }
 }
