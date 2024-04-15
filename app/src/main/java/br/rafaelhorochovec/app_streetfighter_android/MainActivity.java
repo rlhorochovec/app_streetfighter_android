@@ -34,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         fighterAdapter = new FighterAdapter();
         recyclerView.setAdapter(fighterAdapter);
 
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Fighter>> call, Throwable t) {
-                Log.d("TAG","Response = "+t.toString());
+                Log.d("TAG","Response = "+ t);
             }
         });
     }

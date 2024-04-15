@@ -25,6 +25,8 @@ circleimageview = "3.1.0"
 recyclerviewVersion = "1.4.0-alpha01"
 coordinatorlayout = "1.3.0-alpha02"
 glide = "5.0.0-rc01"
+material = "1.10.0"
+activity = "1.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -58,6 +60,8 @@ circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.re
 recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerviewVersion" }
 androidx-coordinatorlayout = { group = "androidx.coordinatorlayout", name = "coordinatorlayout", version.ref = "coordinatorlayout" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
