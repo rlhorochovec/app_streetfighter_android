@@ -2,15 +2,20 @@ package br.rafaelhorochovec.app_streetfighter_android;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Fighter>> call, Throwable t) {
                 Log.d("TAG","Response = "+ t);
+            }
+        });
+        FloatingActionButton fab = findViewById(R.id.create);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getBaseContext(), CreateActivity.class);
+                startActivity(i);
             }
         });
     }
