@@ -3,4 +3,8 @@
     <string name="name">Nome</string>
     <string name="country">País</string>
     <string name="action_search">Pesquisar</string>
+    <string name="add">Adicionar</string>
+    <string name="thumbnailUrl">Avatar</string>
+    <string name="save">Salvar</string>
+    <string name="title_fighter">Adicionar Personagem</string>
 </resources>

@@ -1,6 +1,5 @@
 package br.rafaelhorochovec.app_streetfighter_android.pojo;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Fighter {
@@ -23,14 +22,10 @@ public class Fighter {
     @SerializedName("updatedAt")
     public String updatedAt;
 
-
-    public Fighter(Integer id, String name, String country, String thumbnailUrl, String createdAt, String updatedAt) {
-        this.id = id;
+    public Fighter(String name, String country, String thumbnailUrl) {
         this.name = name;
         this.country = country;
-        this.thumbnailUrl = thumbnailUrl;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.thumbnailUrl =thumbnailUrl;
     }
 
     public Integer getId() {
