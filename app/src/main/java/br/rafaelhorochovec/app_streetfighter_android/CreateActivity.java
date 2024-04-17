@@ -40,7 +40,7 @@ public class CreateActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                thumbnailUrl = "https://rlhorochovec.github.io/streetfighter/"+ nameEdt.getText().toString().toLowerCase() +".jpg";
+                thumbnailUrl = "https://rlhorochovec.github.io/streetfighter/" + nameEdt.getText().toString().toLowerCase() + ".jpg";
                 postFighter(nameEdt.getText().toString(), countryEdt.getText().toString(), thumbnailUrl);
             }
         });
@@ -61,7 +61,7 @@ public class CreateActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Fighter> call, Throwable t) {
-                Log.d("TAG","Response = "+ t);
+                Log.d("TAG", "Response = " + t);
             }
         });
     }

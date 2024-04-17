@@ -7,7 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateActivity">
-
     <TextView
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
@@ -15,7 +14,6 @@
         android:gravity="center_horizontal"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:text="@string/title_fighter"/>
-
     <EditText
         android:id="@+id/edt_name"
         android:layout_marginTop="40dp"
@@ -23,7 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"/>
-
     <EditText
         android:id="@+id/edt_country"
         android:layout_marginTop="20dp"
@@ -31,7 +28,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/country"/>
-
     <Button
         android:id="@+id/btn_submit"
         android:layout_marginTop="20dp"
@@ -41,5 +37,4 @@
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"
         android:text="@string/save"/>
-
 </LinearLayout>

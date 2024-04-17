@@ -54,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Fighter>> call, Response<List<Fighter>> response) {
                 fighterList = response.body();
-                Log.d("TAG","Response = "+ fighterList);
+                Log.d("TAG", "Response = " + fighterList);
                 fighterAdapter.setFighterList(getApplicationContext(), fighterList);
             }
 
             @Override
             public void onFailure(Call<List<Fighter>> call, Throwable t) {
-                Log.d("TAG","Response = "+ t);
+                Log.d("TAG", "Response = " + t);
             }
         });
         FloatingActionButton fab = findViewById(R.id.create);
