@@ -17,21 +17,21 @@
     <EditText
         android:id="@+id/edt_name"
         android:layout_marginTop="40dp"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"/>
     <EditText
         android:id="@+id/edt_country"
         android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/country"/>
     <Button
         android:id="@+id/btn_submit"
         android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
