@@ -27,9 +27,9 @@ public class FighterAdapter extends RecyclerView.Adapter<FighterAdapter.MyViewHo
     private List<Fighter> fightersFiltered;
     private Context context;
 
-    public void setFighterList(Context context, final List<Fighter> fighters){
+    public void setFighterList(Context context, final List<Fighter> fighters) {
         this.context = context;
-        if(this.fighters == null){
+        if (this.fighters == null) {
             this.fighters = fighters;
             this.fightersFiltered = fighters;
             notifyItemChanged(0, fightersFiltered.size());
@@ -54,7 +54,7 @@ public class FighterAdapter extends RecyclerView.Adapter<FighterAdapter.MyViewHo
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
                     Fighter newFighter = FighterAdapter.this.fighters.get(oldItemPosition);
                     Fighter oldFighter = fighters.get(newItemPosition);
-                    return newFighter.getName() == oldFighter.getName() ;
+                    return newFighter.getName() == oldFighter.getName();
                 }
             });
             this.fighters = fighters;
@@ -65,7 +65,7 @@ public class FighterAdapter extends RecyclerView.Adapter<FighterAdapter.MyViewHo
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_custom_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_custom_list, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -78,7 +78,7 @@ public class FighterAdapter extends RecyclerView.Adapter<FighterAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        if(fighters != null){
+        if (fighters != null) {
             return fightersFiltered.size();
         } else {
             return 0;
@@ -120,11 +120,12 @@ public class FighterAdapter extends RecyclerView.Adapter<FighterAdapter.MyViewHo
         TextView name;
         TextView country;
         ImageView image;
+
         public MyViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.name);
             country = (TextView) view.findViewById(R.id.country);
-            image = (ImageView)view.findViewById(R.id.thumbnailUrl);
+            image = (ImageView) view.findViewById(R.id.thumbnailUrl);
         }
     }
 }

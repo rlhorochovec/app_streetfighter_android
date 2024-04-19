@@ -25,7 +25,7 @@ public class Fighter {
     public Fighter(String name, String country, String thumbnailUrl) {
         this.name = name;
         this.country = country;
-        this.thumbnailUrl =thumbnailUrl;
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public Integer getId() {
