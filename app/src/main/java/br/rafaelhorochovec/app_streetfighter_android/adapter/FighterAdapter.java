@@ -1,13 +1,18 @@
 package br.rafaelhorochovec.app_streetfighter_android.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,10 +23,13 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.rafaelhorochovec.app_streetfighter_android.ProfileActivity;
 import br.rafaelhorochovec.app_streetfighter_android.R;
 import br.rafaelhorochovec.app_streetfighter_android.pojo.Fighter;
 
 public class FighterAdapter extends RecyclerView.Adapter<FighterAdapter.MyViewHolder> implements Filterable {
+
+    private static final String TAG = "RecyclerViewAdapter";
 
     private List<Fighter> fighters;
     private List<Fighter> fightersFiltered;
@@ -70,10 +78,25 @@ public class FighterAdapter extends RecyclerView.Adapter<FighterAdapter.MyViewHo
     }
 
     @Override
+    @SuppressLint("RecyclerView")
     public void onBindViewHolder(FighterAdapter.MyViewHolder holder, int position) {
         holder.name.setText(fightersFiltered.get(position).getName());
         holder.country.setText(fightersFiltered.get(position).getCountry());
         Glide.with(context).load(fighters.get(position).getThumbnailUrl()).apply(RequestOptions.centerCropTransform()).into(holder.image);
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked on: " + fighters.get(position).getName());
+                Toast.makeText(context, fighters.get(position).getName(), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(context, ProfileActivity.class);
+                intent.putExtra("thumbnailUrl", fighters.get(position).getThumbnailUrl());
+                intent.putExtra("name", fighters.get(position).getName());
+                intent.putExtra("country", fighters.get(position).getCountry());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -120,12 +143,14 @@ public class FighterAdapter extends RecyclerView.Adapter<FighterAdapter.MyViewHo
         TextView name;
         TextView country;
         ImageView image;
+        RelativeLayout parentLayout;
 
         public MyViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.name);
             country = (TextView) view.findViewById(R.id.country);
             image = (ImageView) view.findViewById(R.id.thumbnailUrl);
+            parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
 }
