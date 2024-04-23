@@ -31,6 +31,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     private SearchView searchView;
     private FighterAdapter fighterAdapter;
     private List<Fighter> fighterList;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d(TAG, "onCreate: started.");
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         fighterList = new ArrayList<>();
         ApiInterface apiService = ApiClient.getRetrofitInstance().create(ApiInterface.class);
         Call<List<Fighter>> call = apiService.getFighters();
+
+        Log.d(TAG, "Callback: ApiClient.");
 
         call.enqueue(new Callback<List<Fighter>>() {
             @Override
