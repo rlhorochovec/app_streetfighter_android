@@ -32,10 +32,10 @@ public class ProfileActivity extends AppCompatActivity {
         getIncomingIntent();
     }
 
-    private void getIncomingIntent(){
+    private void getIncomingIntent() {
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
 
-        if(getIntent().hasExtra("thumbnailUrl") && getIntent().hasExtra("name") && getIntent().hasExtra("country")){
+        if (getIntent().hasExtra("thumbnailUrl") && getIntent().hasExtra("name") && getIntent().hasExtra("country")) {
             Log.d(TAG, "getIncomingIntent: found intent extras.");
 
             String thumbnailUrl = getIntent().getStringExtra("thumbnailUrl");
@@ -46,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void setImage(String thumbnailUrl, String name, String country){
+    private void setImage(String thumbnailUrl, String name, String country) {
         Log.d(TAG, "setImage: setting te image and name to widgets.");
 
         TextView fighter = findViewById(R.id.name);
