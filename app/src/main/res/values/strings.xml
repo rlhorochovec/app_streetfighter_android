@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">Street Fighter</string>
-    <string name="name">Nome</string>
-    <string name="country">País</string>
-    <string name="action_search">Pesquisar</string>
-    <string name="add">Adicionar</string>
-    <string name="thumbnailUrl">Avatar</string>
+    <string name="name">Nome do personagem</string>
+    <string name="country">País de origem</string>
     <string name="save">Salvar</string>
-    <string name="title_fighter">Adicionar Personagem</string>
+    <string name="update">Alterar</string>
+    <string name="delete">Remover</string>
+    <string name="action_settings">Configurações</string>
+    <string name="person_title">Personagens</string>
+    <string name="add">Adicionar</string>
+    <string name="add_title">Adicionar Personagem</string>
+    <string name="update_title">Alterar Personagem</string>
+
 </resources>
