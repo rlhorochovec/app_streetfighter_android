@@ -1,79 +1,74 @@
 package br.rafaelhorochovec.app_streetfighter_android;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.rafaelhorochovec.app_streetfighter_android.adapter.FighterAdapter;
 import br.rafaelhorochovec.app_streetfighter_android.pojo.Fighter;
 import br.rafaelhorochovec.app_streetfighter_android.retrofit.ApiClient;
 import br.rafaelhorochovec.app_streetfighter_android.retrofit.ApiInterface;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-
-    private SearchView searchView;
-    private FighterAdapter fighterAdapter;
-    private List<Fighter> fighterList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate: started.");
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CreateFighterActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 
-        fighterAdapter = new FighterAdapter();
-        recyclerView.setAdapter(fighterAdapter);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final ListView list = (ListView) findViewById(R.id.lvFighters);
 
-        fighterList = new ArrayList<>();
         ApiInterface apiService = ApiClient.getRetrofitInstance().create(ApiInterface.class);
         Call<List<Fighter>> call = apiService.getFighters();
-
-        Log.d(TAG, "Callback: ApiClient.");
 
         call.enqueue(new Callback<List<Fighter>>() {
             @Override
             public void onResponse(Call<List<Fighter>> call, Response<List<Fighter>> response) {
-                fighterList = response.body();
-                Log.d("TAG", "Response = " + fighterList);
-                fighterAdapter.setFighterList(getApplicationContext(), fighterList);
+                final List<Fighter> listFighters = response.body();
+                if (listFighters != null) {
+                    FighterAdapter adapter = new FighterAdapter(getBaseContext(), listFighters);
+                    list.setAdapter(adapter);
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Intent intent = new Intent(MainActivity.this, EditFighterActivity.class);
+                            intent.putExtra("ID", listFighters.get(i).getId());
+                            startActivity(intent);
+                        }
+                    });
+                }
             }
 
             @Override
             public void onFailure(Call<List<Fighter>> call, Throwable t) {
-                Log.d("TAG", "Response = " + t);
-            }
-        });
-        FloatingActionButton fab = findViewById(R.id.create);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getBaseContext(), CreateActivity.class);
-                startActivity(i);
+                Toast.makeText(getBaseContext(), "Falha na conexão.", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -81,43 +76,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                fighterAdapter.getFilter().filter(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) {
-                fighterAdapter.getFilter().filter(query);
-                return false;
-            }
-        });
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_search) {
+        if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (!searchView.isIconified()) {
-            searchView.setIconified(true);
-            return;
-        }
-        super.onBackPressed();
     }
 }
