@@ -4,7 +4,7 @@ Projeto de aplicativo utilizando Android Java e Retrofit, consumindo dados de um
 
 ## Telas
 - Splash Screen
-_ Listar
+- Listar
 - Adicionar
 - Editar
 
