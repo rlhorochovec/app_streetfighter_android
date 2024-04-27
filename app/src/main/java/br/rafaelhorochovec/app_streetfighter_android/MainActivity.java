@@ -10,7 +10,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            Intent intent = new Intent(MainActivity.this, UpdateFighterActivity.class);
+                            Intent intent = new Intent(MainActivity.this, EditFighterActivity.class);
                             intent.putExtra("ID", listFighters.get(i).getId());
                             startActivity(intent);
                         }

@@ -1,6 +1,7 @@
 package br.rafaelhorochovec.app_streetfighter_android;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +49,8 @@ public class CreateFighterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Fighter> call, Response<Fighter> response) {
                         Toast.makeText(getBaseContext(), "Salvo com sucesso.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(CreateFighterActivity.this, MainActivity.class);
+                        startActivity(intent);
                     }
 
                     @Override

@@ -26,5 +26,5 @@ public interface ApiInterface {
     Call<Void> updateFighter(@Path("id") Integer id, @Body Fighter fighter);
 
     @DELETE("/api/fighters/{id}")
-    Call<Void> removeFighter(@Path("id") Integer id);
+    Call<Void> deleteFighter(@Path("id") Integer id);
 }
