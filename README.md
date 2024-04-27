@@ -4,12 +4,10 @@ Projeto de aplicativo utilizando Android Java e Retrofit, consumindo dados de um
 
 ## Telas
 - Splash Screen
-- Filtrar
+_ Listar
 - Adicionar
-- Listar
-- Perfil
-
+- Editar
 
 ## Screenshots
-<img src="https://github.com/rlhorochovec/app_streetfighter_android/blob/develop/screenshots/splash_screen.png" width="250" /> <img src="https://github.com/rlhorochovec/app_streetfighter_android/blob/develop/screenshots/list_fighters.png" width="250" /> <img src="https://github.com/rlhorochovec/app_streetfighter_android/blob/develop/screenshots/filter_fighter.png" width="250" /> 
-<img src="https://github.com/rlhorochovec/app_streetfighter_android/blob/develop/screenshots/create_fighter.png" width="250" /> <img src="https://github.com/rlhorochovec/app_streetfighter_android/blob/develop/screenshots/profile_fighter.png" width="250" />
+<img src="https://github.com/rlhorochovec/app_streetfighter_android/blob/develop/screenshots/splash_screen.png" width="250" /> <img src="https://github.com/rlhorochovec/app_streetfighter_android/blob/develop/screenshots/list_fighters.png" width="250" /> <img =
+<img src="https://github.com/rlhorochovec/app_streetfighter_android/blob/develop/screenshots/create_fighter.png" width="250" /> <img src="https://github.com/rlhorochovec/app_streetfighter_android/blob/develop/screenshots/edit_fighter.png" width="250" />
