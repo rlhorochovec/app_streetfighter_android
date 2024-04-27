@@ -6,9 +6,8 @@
     <string name="update">Alterar</string>
     <string name="delete">Remover</string>
     <string name="action_settings">Excluir Todos</string>
-    <string name="person_title">Personagens</string>
+    <string name="person_title">Lista de Personagens</string>
     <string name="add">Adicionar</string>
     <string name="add_title">Adicionar Personagem</string>
     <string name="update_title">Alterar Personagem</string>
-
 </resources>
