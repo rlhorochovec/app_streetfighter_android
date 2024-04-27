@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/cardview_light_background"
     android:orientation="horizontal"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="5dp"
     app:cardElevation="2dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/parent_layout">
+        android:orientation="vertical">
+
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/thumbnailUrl"
+            android:id="@+id/imgThumbnailUrl"
             android:src="@mipmap/ic_launcher_round"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:padding="10dp" />
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@id/thumbnailUrl"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:gravity="center_vertical"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/black" />
+            android:padding="10dp" />
+
         <TextView
-            android:id="@+id/country"
-            android:layout_below="@id/name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_toEndOf="@id/imgThumbnailUrl"
             android:layout_marginStart="10dp"
-            android:layout_toEndOf="@id/thumbnailUrl" />
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/name"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:textStyle="bold"
+            android:id="@+id/txtName" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/imgThumbnailUrl"
+            android:layout_marginStart="10dp"
+            android:gravity="center_vertical"
+            android:layout_below="@+id/txtName"
+            android:text="@string/country"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:id="@+id/txtCountry" />
     </RelativeLayout>
+
 </androidx.cardview.widget.CardView>

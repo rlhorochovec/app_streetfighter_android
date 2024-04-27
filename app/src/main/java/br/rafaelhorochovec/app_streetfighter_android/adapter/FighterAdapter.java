@@ -2,155 +2,49 @@ package br.rafaelhorochovec.app_streetfighter_android.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import br.rafaelhorochovec.app_streetfighter_android.ProfileActivity;
 import br.rafaelhorochovec.app_streetfighter_android.R;
 import br.rafaelhorochovec.app_streetfighter_android.pojo.Fighter;
 
-public class FighterAdapter extends RecyclerView.Adapter<FighterAdapter.MyViewHolder> implements Filterable {
+public class FighterAdapter extends ArrayAdapter<Fighter> {
+    private final Context context;
+    private final List<Fighter> fighters;
 
-    private static final String TAG = "RecyclerViewAdapter";
-
-    private List<Fighter> fighters;
-    private List<Fighter> fightersFiltered;
-    private Context context;
-
-    public void setFighterList(Context context, final List<Fighter> fighters) {
+    public FighterAdapter(Context context, List<Fighter> fighters) {
+        super(context, R.layout.item_view, fighters);
         this.context = context;
-        if (this.fighters == null) {
-            this.fighters = fighters;
-            this.fightersFiltered = fighters;
-            notifyItemChanged(0, fightersFiltered.size());
-        } else {
-            final DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
-                @Override
-                public int getOldListSize() {
-                    return FighterAdapter.this.fighters.size();
-                }
-
-                @Override
-                public int getNewListSize() {
-                    return fighters.size();
-                }
-
-                @Override
-                public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    return FighterAdapter.this.fighters.get(oldItemPosition).getName() == fighters.get(newItemPosition).getName();
-                }
-
-                @Override
-                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    Fighter newFighter = FighterAdapter.this.fighters.get(oldItemPosition);
-                    Fighter oldFighter = fighters.get(newItemPosition);
-                    return newFighter.getName() == oldFighter.getName();
-                }
-            });
-            this.fighters = fighters;
-            this.fightersFiltered = fighters;
-            result.dispatchUpdatesTo(this);
-        }
+        this.fighters = fighters;
     }
 
+    @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_custom_list, parent, false);
-        return new MyViewHolder(view);
-    }
+    @SuppressLint("ViewHolder")
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
-    @Override
-    @SuppressLint("RecyclerView")
-    public void onBindViewHolder(FighterAdapter.MyViewHolder holder, int position) {
-        holder.name.setText(fightersFiltered.get(position).getName());
-        holder.country.setText(fightersFiltered.get(position).getCountry());
-        Glide.with(context).load(fighters.get(position).getThumbnailUrl()).apply(RequestOptions.centerCropTransform()).into(holder.image);
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on: " + fighters.get(position).getName());
-                Toast.makeText(context, fighters.get(position).getName(), Toast.LENGTH_SHORT).show();
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View rowView = inflater.inflate(R.layout.item_view, parent, false);
 
-                Intent intent = new Intent(context, ProfileActivity.class);
-                intent.putExtra("thumbnailUrl", fighters.get(position).getThumbnailUrl());
-                intent.putExtra("name", fighters.get(position).getName());
-                intent.putExtra("country", fighters.get(position).getCountry());
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }
-        });
-    }
+        ImageView thumbnailUrl = rowView.findViewById(R.id.imgThumbnailUrl);
+        TextView name = rowView.findViewById(R.id.txtName);
+        TextView country = rowView.findViewById(R.id.txtCountry);
 
-    @Override
-    public int getItemCount() {
-        if (fighters != null) {
-            return fightersFiltered.size();
-        } else {
-            return 0;
-        }
-    }
+        name.setText(fighters.get(position).getName());
+        country.setText(fighters.get(position).getCountry());
+        Glide.with(context).load(fighters.get(position).getThumbnailUrl()).apply(RequestOptions.centerCropTransform()).into(thumbnailUrl);
 
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                String charString = charSequence.toString();
-                if (charString.isEmpty()) {
-                    fightersFiltered = fighters;
-                } else {
-                    List<Fighter> filteredList = new ArrayList<>();
-                    for (Fighter fighter : fighters) {
-                        if (fighter.getName().toLowerCase().contains(charString.toLowerCase())) {
-                            filteredList.add(fighter);
-                        }
-                    }
-                    fightersFiltered = filteredList;
-                }
-
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = fightersFiltered;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                fightersFiltered = (ArrayList<Fighter>) filterResults.values;
-                notifyDataSetChanged();
-            }
-        };
-    }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        TextView country;
-        ImageView image;
-        RelativeLayout parentLayout;
-
-        public MyViewHolder(View view) {
-            super(view);
-            name = (TextView) view.findViewById(R.id.name);
-            country = (TextView) view.findViewById(R.id.country);
-            image = (ImageView) view.findViewById(R.id.thumbnailUrl);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
-        }
+        return rowView;
     }
 }
