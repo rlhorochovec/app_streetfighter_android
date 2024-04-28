@@ -10,4 +10,9 @@
     <string name="add">Adicionar</string>
     <string name="add_title">Adicionar Personagem</string>
     <string name="update_title">Alterar Personagem</string>
+    <string name="details">Detalhes</string>
+    <string name="info">Informações</string>
+    <string name="info_name">Nome</string>
+    <string name="info_country">País</string>
+    <string name="edit">Editar</string>
 </resources>
