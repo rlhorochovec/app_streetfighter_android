@@ -32,7 +32,6 @@ public class EditFighterActivity extends AppCompatActivity {
         final EditText name = (EditText) findViewById(R.id.edtName);
         final EditText country = (EditText) findViewById(R.id.edtCountry);
 
-
         Intent intent = getIntent();
         final Integer id = intent.getIntExtra("ID", 0);
 
@@ -81,7 +80,7 @@ public class EditFighterActivity extends AppCompatActivity {
             }
         });
 
-        Button deleteBtn = (Button) findViewById(R.id.btnDelete);
+        Button deleteBtn = (Button) findViewById(R.id.btnEdit);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

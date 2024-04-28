@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            Intent intent = new Intent(MainActivity.this, EditFighterActivity.class);
+                            Intent intent = new Intent(MainActivity.this, DetailFighterActivity.class);
                             intent.putExtra("ID", listFighters.get(i).getId());
                             startActivity(intent);
                         }
